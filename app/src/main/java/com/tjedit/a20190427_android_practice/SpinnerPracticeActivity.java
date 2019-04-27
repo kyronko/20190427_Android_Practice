@@ -3,6 +3,9 @@ package com.tjedit.a20190427_android_practice;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.tjedit.a20190427_android_practice.adapters.PizzaStoreAdapter;
 import com.tjedit.a20190427_android_practice.databinding.ActivitySpinnerPracticeBinding;
@@ -21,10 +24,18 @@ public class SpinnerPracticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         act = DataBindingUtil.setContentView(this,R.layout.activity_spinner_practice);
 
+        fillPizzaStores();
         pizzaStoreAdapter = new PizzaStoreAdapter(SpinnerPracticeActivity.this,pizzaStores);
         act.pizzaStoreSpinner.setAdapter(pizzaStoreAdapter);
 
-        fillPizzaStores();
+        act.pizzaStoreSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(SpinnerPracticeActivity.this, String.format("%s 선택",pizzaStores.get(position)), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     void fillPizzaStores(){
