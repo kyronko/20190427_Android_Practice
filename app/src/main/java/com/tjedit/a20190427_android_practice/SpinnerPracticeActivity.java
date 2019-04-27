@@ -25,13 +25,23 @@ public class SpinnerPracticeActivity extends AppCompatActivity {
         act = DataBindingUtil.setContentView(this,R.layout.activity_spinner_practice);
 
         fillPizzaStores();
-        pizzaStoreAdapter = new PizzaStoreAdapter(SpinnerPracticeActivity.this,pizzaStores);
+        pizzaStoreAdapter = new PizzaStoreAdapter(SpinnerPracticeActivity.this, pizzaStores);
         act.pizzaStoreSpinner.setAdapter(pizzaStoreAdapter);
 
         act.pizzaStoreSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(SpinnerPracticeActivity.this, String.format("%s 선택",pizzaStores.get(position)), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        act.cofirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+        int selectedPostion = act.pizzaStoreSpinner.getSelectedItemPosition();
+        String selectedPizzaStorName = pizzaStores.get(selectedPostion).storeName;
+                Toast.makeText(SpinnerPracticeActivity.this,String.format("현재 선택된 가게이름 : %s",selectedPizzaStorName), Toast.LENGTH_SHORT).show();
+
             }
         });
 
