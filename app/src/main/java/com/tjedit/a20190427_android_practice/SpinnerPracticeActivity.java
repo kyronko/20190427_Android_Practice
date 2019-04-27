@@ -28,20 +28,25 @@ public class SpinnerPracticeActivity extends AppCompatActivity {
         pizzaStoreAdapter = new PizzaStoreAdapter(SpinnerPracticeActivity.this, pizzaStores);
         act.pizzaStoreSpinner.setAdapter(pizzaStoreAdapter);
 
-        act.pizzaStoreSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        act.pizzaStoreSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(SpinnerPracticeActivity.this, String.format("%s 선택",pizzaStores.get(position)), Toast.LENGTH_SHORT).show();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                Toast.makeText(SpinnerPracticeActivity.this, String.format("%s 선택", pizzaStores.get(position).storeName), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
         act.cofirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        int selectedPostion = act.pizzaStoreSpinner.getSelectedItemPosition();
-        String selectedPizzaStorName = pizzaStores.get(selectedPostion).storeName;
-                Toast.makeText(SpinnerPracticeActivity.this,String.format("현재 선택된 가게이름 : %s",selectedPizzaStorName), Toast.LENGTH_SHORT).show();
-
+                int selectedPosition = act.pizzaStoreSpinner.getSelectedItemPosition();
+                String selectedPizzaStoreName = pizzaStores.get(selectedPosition).storeName;
+                Toast.makeText(SpinnerPracticeActivity.this, String.format("현재 선택된 가게이름 : %s", selectedPizzaStoreName), Toast.LENGTH_SHORT).show();
             }
         });
 
